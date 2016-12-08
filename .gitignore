@@ -1,0 +1,66 @@
+#include "matriz.h"                 //documento de la matriz
+int i=0;                            //variable para filas declarada como i
+int j=0;                            //variable para columnas declarada como j
+int Suma;                           //variable para la suma
+int Producto;                           //variable para la multiplicacion
+float Promedio;                         //variable para el promedio
+float sumapromedio=0;                      //variable para la suma del promedio
+
+void setup() {
+Serial.begin(9600);
+}
+void loop() {
+//=========================================================================================
+// CICLO DECLA SUMA POR FILA
+if(Serial.available()>0)                                //condicion para eleir la opcion 
+{
+  if(Serial.read()=='1'){                               //cuando se pulse 1 se realizara la suma de las filas de la matriz
+    for(i=0;i<20;i++){                                  //ciclo del for 
+          while(j<=2){                                  //controla las columnas                        
+          Suma=Suma+matriz[i][j];                       //suma de cada numero de la columna
+          delay(200);                                   //retardo de tiempo
+          j++;                                          //aumenta la columna
+          }                                             //cierra el ciclo del while
+          Serial.print("LA SUMA DE LA FILA ES = ");     //imprimir el mensaje
+          Serial.println(Suma);                         //imprime suma   
+          Suma=0;                                       //reinicia variable a cero 
+          j=0;                                          //reinicia variable a cero
+      }    
+   }
+}
+//==========================================================================================
+// CICLO DE LA MULTIPLICACION DE LA COLUMNA
+
+if(Serial.available()>0){                                //condicion para eleir la opcion 
+   if(Serial.read()=='2'){                            //cuando se pulse 2 se realizara la multiplicacion de las colunma de la matriz
+    long int Producto;
+    for(i=0;i<=2;i++){                                  //ciclo del for para controlar las filas
+      for(j=0;j<=19;j++){                               //ciclo del for para controlar las columnas 
+      Producto=Producto*matriz[j][i];                   //multiplicacion de los numeros de la columna
+      }
+      Serial.print( "EL PRODUCTO TOTAL LA COMUNMA ES = " );        //imprime mensaje 
+      Serial.println(Producto);                         //imprime producto de la columna
+      delay(400);                                       //tiempo de retardo
+      Producto=1;                                       //reinicia variable a uno
+      j=0;                                              //reinicia variable a cero
+     }
+   } 
+}
+//============================================================================================00
+// CICLO DEL PROMEDIO
+
+if(Serial.available()>0){                             //condicion para eleir la opcion 
+   if(Serial.read()=='3'){                              //si pulsa 3 se realizara el promedio de toda la matriz 
+    for(j=0;j<=2;j++){                                 //ciclo del for para controlar las columnas
+      for(i=0;i<=20;i++){                              //ciclo del for para controlar las filas
+       sumapromedio = sumapromedio + matriz[i][j];     //suma de cada numero de la matriz
+      }
+      j=0;                                             //reinicia variable
+      }     
+      Promedio=sumapromedio/3;                         //promedio debidiendo para 3
+      Serial.print("EL PROMEDIO TOTAL DE LA MATRIZ ES = "); //imprime mensaje
+      Serial.print(Promedio);                              //imprime promedio ya calculado
+      delay (200);                                     //tiempo de retardo
+    }
+  }
+}
